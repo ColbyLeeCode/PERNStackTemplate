@@ -21,6 +21,7 @@ function App() {
         <Route path="/profile" component={Profile}/>
       </UserProvider>
       <Route path="/" exact component={Login}/>
+      <Route path="/login" exact component={Login}/>
     </Router>
   );
 }
