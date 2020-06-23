@@ -1,6 +1,6 @@
 const express = require("express");
-const app = express();
 const cors = require("cors");
+
 const passport = require("passport");
 const GoogleStrat = require("passport-google-oauth").OAuth2Strategy;
 const pool = require("./db");
@@ -8,9 +8,26 @@ const keys = require("./keys/authkeys");
 const chalk = require("chalk");
 let user = {};
 
+
+
+//Authorization Strat for Google Login
+passport.use(new GoogleStrat ({
+    clientID: keys.GOOGLE.clientID,
+    clientSecret: keys.GOOGLE.clientSecret,
+    callbackURL: "/auth/google/callback"
+},
+    (accessToken, refreshToken, profile, cb) => {
+        console.log(chalk.blue(JSON.stringify(profile)));
+        user = { ...profile };
+        return cb(null, profile);
+    }
+));
+
 //middleware
+const app = express();
 app.use(cors());
 app.use(express.json());
+
 app.use(passport.initialize());
 
 passport.serializeUser((user, cb) =>{
@@ -21,35 +38,28 @@ passport.deserializeUser((user, cb) =>{
     cb(null, user);
 });
 
-//Authorization Strat for Google Login
-passport.use(new GoogleStrat ({
-    clientID: keys.GOOGLE.clientID,
-    clientSecret: keys.GOOGLE.clientSecret,
-    callbackUrl: "/auth/google/callback"
-},
-    (accessToken, refreshToken, profile, cb) => {
-        console.log(chalk.blue(JSON.stringify(profile)));
-        user = { ...profile };
-        return cb(null, profile);
-    }
-));
+
 
 
 //ROUTES//
 //Login routes used to authenticate user with Google Sign on
-app.get("/auth/google", passport.authenticate("google", {
+app.get("/auth/google", passport.authenticate("google",  {
     scope: ["profile", "email"]
 }));
 app.get("/auth/google/callback",
-    passport.authenticate(("google"), (req, res) => {
-        res.redirect("/board");
-    }));
+    passport.authenticate("google"), (req, res) => {
+        res.redirect("/home");
+    });
 
 app.get("/auth/logout", (req, res) => {
     console.log("logging out!");
     user = {};
     res.redirect("/"); 
-})
+});
+
+app.get("/user", (req, res) => {
+    res.json(JSON.stringify(user));
+});
 
 
 
