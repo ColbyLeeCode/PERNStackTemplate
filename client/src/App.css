@@ -156,3 +156,114 @@ a{
   font-weight: bolder;
 }
 
+
+.sidebar{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 60px;
+  height: 100%;
+  background-image: linear-gradient(to top,   #09203f 0%, #537895 100%);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  justify-content: center;
+  padding-top: 50px;
+  transition: all .2s ease-in-out;
+}
+
+.side-open{
+  left: -52px;
+}
+
+.burger-button-wrap{
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  transition: all .5s ease-in-out;
+  top: 15px;
+  left: 16px;
+  z-index: 1;
+}
+
+.burger-button{
+  width: 30px;
+  height: 4px;
+  background: #09203f;
+  border-radius: 1px;
+  transition: all .5s ease-in-out;
+}
+
+.burger-button::before,
+.burger-button::after{
+  content: '';
+  position: absolute;
+  width: 30px;
+  height: 4px;
+  background: #537895;
+  border-radius: 1px;
+  transition: all .5s ease-in-out;
+}
+
+.burger-button::before{
+  transform: translateY(-8px);
+}
+
+.burger-button::after{
+  transform: translateY(8px);
+}
+
+.burger-button-wrap.open .burger-button{
+  transform: translateX(-30px);
+  background: transparent;
+  box-shadow: none;
+  
+}
+
+.burger-button-wrap.open .burger-button::before{
+  transform: rotate(45deg) translate(20px, -20px);
+  background: white;
+  
+}
+
+.burger-button-wrap.open .burger-button::after{
+  transform: rotate(-45deg) translate(20px, 20px);
+  background: white;
+}
+
+.nav-icon{
+  width: 100%;
+  text-align: center;
+  color: white;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  transition: all .3s ease-in-out;
+  cursor: pointer;
+}
+
+.nav-icon:hover{
+  background-color: #537895;
+}
+
+.nav-icon .title{
+  font-size: 12px;
+  font-weight: bolder;
+}
+
+.nav-icon i{
+  font-size: 24px;
+}
+
+.title{
+  margin-top: -5px;
+}
+
+.l-text{
+  opacity: 0;
+}
+
+

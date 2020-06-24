@@ -7,7 +7,7 @@ const Login = () =>{
 
     return(
         <div className="login">
-            Login!
+            <div className="l-text">Login</div>
             <div class="logo"><div className="icon"><FontAwesomeIcon icon={faChalkboardTeacher} /></div><strong>ADMIN DASH</strong></div>
   
             <div class="login-container">

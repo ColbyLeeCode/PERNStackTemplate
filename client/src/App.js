@@ -5,8 +5,6 @@ import './App.css';
 import './setupProxy';
 
 //components
-import InputTodo from "./components/InputTodo";
-import ListTodos from './components/ListTodo';
 import UserProvider from './context/UserProvider';
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
@@ -18,6 +16,7 @@ function App() {
     <Router history={history()}>
       <UserProvider>
         <Route path="/" component={MenuBar}/>
+        <Route path="/home" component={Home}/>
         <Route path="/profile" component={Profile}/>
       </UserProvider>
       <Route path="/" exact component={Login}/>
